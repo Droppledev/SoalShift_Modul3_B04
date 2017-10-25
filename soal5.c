@@ -1,5 +1,4 @@
- 
-#include <stdio.h>
+ #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
 #include <pthread.h>
@@ -56,5 +55,4 @@ int main (int argc, char *argv[]){
     for (i=1; i<argc ; i++){
         pthread_join(tid[i],NULL);
     }
-    
 }
