@@ -6,20 +6,17 @@
 pthread_t tid[1000];
 int n;
 
-void faktorial (*ar) {
-    int j;
-    long long result =1;
-        for (j=tid[i]; j>=2; j--){
-            result *=j; 
-         }
-         printf ("Hasil %d!= %lld", i, result);
+void *faktorial (void *arg) {
+    int i, j;
+    int value =  (int*) arg;
+    int result =1;
+    
+    for (j= value; j>=2; j--){
+        result *=j; 
         }
-    }
-    
-    }
-    
+    printf ("Hasil %d!= %d\n", value, result);
+        
 }
-
 
 int main (int argc, char *argv[]){
     int i;
