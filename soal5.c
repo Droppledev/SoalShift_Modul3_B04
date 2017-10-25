@@ -8,6 +8,16 @@ pthread_t tid[2];
 char str[1500]; // untuk nyimpen seluruh kata yang ada di dalam file
 char arr[250][30]; // untuk dipecah-pecah
 
+int find(char *argv[],int indeks, int jumkata){
+    int i,counter=0;
+    for (i=0;i<jumkata;i++){
+        if (strcmp(arr[i],argv[indeks])==0){
+            counter++;
+        }
+    }
+    return counter;
+}
+
 int main (int argc, char argv[]){
     int i,j,k;
     j=k=0;
