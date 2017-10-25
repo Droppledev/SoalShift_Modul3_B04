@@ -22,7 +22,7 @@ void *read_words (void *arg) {
     char x[128];
     char *string = (char *) arg;
 
-    printf("%s = %d\n",string,find(string));
+    printf("%s : %d\n",string,find(string));
     
 }
 
