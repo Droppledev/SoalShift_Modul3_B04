@@ -6,7 +6,7 @@
 
 
 char weapon[6][10] ={"MP4A1", "PM2-V1", "SPR-3", "SS2-V5", "SPG1-V3","MINE"};
-int quantity[6] = {NULL,0,0,0,0,0,0}    ;
+int *quantity;
 
 void ListSenjata () {
     int i;
@@ -38,22 +38,13 @@ int main (){
     int i;
     key_t key = 1234;
     int shmid = shmget(key, 6*sizeof(int), IPC_CREAT | 0666);
-    *quantity = shmat(shmid, NULL, 0);
-    //printf ("%d ", quantity[3]);
-    //printf ("%d ", quantity[6]);
-    shmdt(*quantity);
-    shmctl(shmid, IPC_RMID, NULL);
-    
-    
+    quantity = (int *) shmat(shmid, NULL, 0);
     
     while (1){
-        for (i=0; i<6; i++)
-            printf("%s: %d\n", weapon[i], quantity[i+1]);
-        
-       
-        printf ("1. Stock senjata\n2. tambah stock senjata\n");
+        printf ("---------------------------\n1. Stock senjata\n2. tambah stock senjata\n---------------------------\n");
         printf ("Pilih Menu 1 atau 2: ") ;
         scanf ("%d", &menu);
+        printf ("---------------------------\n");
         switch (menu){
             case 1:
                 ListSenjata();
@@ -62,5 +53,9 @@ int main (){
                 tambahStock();
                 break;
         }
+       
     }
+    shmdt(*quantity);
+    shmctl(shmid, IPC_RMID, NULL);
+    
 }
