@@ -34,17 +34,6 @@ void BeliSenjata (){
     }
     
 }
-#include <stdio.h>
-#include <sys/ipc.h>
-#include <sys/shm.h>
-#include <unistd.h>
-#include <string.h>
-char weapon[6][10] ={"MP4A1", "PM2-V1", "SPR-3", "SS2-V5", "SPG1-V3","MINE"};
-int *quantity;
-
-void ListSenjata ();
-void BeliSenjata ();
-
 int main (){
     int menu;
     int i;
@@ -70,32 +59,3 @@ int main (){
     shmdt(*quantity);
     shmctl(shmid, IPC_RMID, NULL);
 }
-
-void ListSenjata () {
-    int i;
-    for (i=0; i<6; i++)
-        printf("%s: %d\n", weapon[i], quantity[i+1]);
-}
-
-void BeliSenjata (){
-    char name[10];
-    int amount;
-    int i;
-    printf ("Masukkan nama senjata dan jumlah: ");
-    scanf ("%s %d", &name, &amount);
-     
-    for (i=0; i<6; i++){
-       // printf ("%s %s ", weapon[i], name);
-       if( strcmp (weapon[i],name)==0){
-           int tmp = quantity[i+1] - amount;
-            if(tmp < 0) 
-               printf("barang di stock tidak cukup\n\n");
-            else
-                quantity[i+1] = tmp;
-       }    
-    }   
-}
-
-
-
-
