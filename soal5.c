@@ -18,13 +18,12 @@ int find(char *argv[],int indeks, int jumkata){
     return counter;
 }
 
-int main (int argc, char argv[]){
+int main (int argc, char *argv[]){
     int i,j,k;
     j=k=0;
     FILE* novel = fopen("Novel.txt","r");
-    while (fgets(str,1500,novel)!=NULL){
-        
-    for (i=0;str[i]!='\0';i++){
+    while (fgets(str,1500,novel)!=NULL){  
+        for (i=0;str[i]!='\0';i++){
             if (str[i]==' ' || str[i]==',' || str[i]=='.'){
                 j++;
                 k=0;
