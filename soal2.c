@@ -11,62 +11,70 @@ int holeP2[16]={0};
 int banyak;
 int poinP1=0;
 int poinP2=0;
+int status;
 
 
 void *pemain1(void *arg){
     int i,pilih;
-    printf("Masukkan banyak lubang yang ingin Pemain 1 isi > ");
+    printf("Masukkan banyak lubang yang ingin Pemain 1 isi (maks 4)  > ");
     scanf("%d",&banyak);
+    printf("Pilih %d lubang sekaligus untuk dimasukkan ranjau (1-16) > ", banyak);
     for (i=0;i<banyak;){
-        printf("Pilih lubang untuk dimasukkan ranjau (1-16) > ");
         scanf("%d",&pilih);
         if (holeP1[pilih-1]==1){
-            printf("Lubang sudah diberi ranjau, pilih lubang lain !");
+            printf("Lubang %d sudah diberi ranjau, pilih lubang lain !\n", pilih);
         }
         else {
             holeP1[pilih-1] = 1;
             i++;
         }
     }
-    printf("Pemain 2 menebak lubang sebanyak 4 kali > \n");
+    printf("Pemain 2 menebak lubang sebanyak 4 kali > ");
     for (i=0;i<4;i++){
         scanf("%d",&pilih);
         if (holeP1[pilih-1]==1){
-            printf("Pemain 2 terkena ranjau !");
+            printf("Pemain 2 terkena ranjau !\n");
             poinP1++;
         }
         else{
-            printf("Pemain 2 selamat !");
+            printf("Pemain 2 selamat !\n");
             poinP2++;
         }
     }
+    status =1;
     
 }
 
 void *pemain2(void *arg){
+      while(status != 1)
+    {
+
+    }
+
     int i,pilih;
-    printf("Masukkan banyak lubang yang ingin Pemain 2 isi > ");
+    printf("Masukkan banyak lubang yang ingin Pemain 2 isi (maks 4) > ");
     scanf("%d",&banyak);
+    printf("Pilih %d lubang sekaligus untuk dimasukkan ranjau (1-16) > ", banyak);
     for (i=0;i<banyak;){
-        printf("Pilih lubang untuk dimasukkan ranjau (1-16) > ");
+ 
         scanf("%d",&pilih);
         if (holeP2[pilih-1]==1){
-            printf("Lubang sudah diberi ranjau, pilih lubang lain !");
+            printf("Lubang %d sudah diberi ranjau, pilih lubang lain !\n", pilih);
         }
         else {
             holeP2[pilih-1] = 1;
             i++;
         }
     }
-    printf("Pemain 1 menebak lubang sebanyak 4 kali > \n");
+    printf("Pemain 1 menebak lubang sebanyak 4 kali > ");
     for (i=0;i<4;i++){
         scanf("%d",&pilih);
         if (holeP2[pilih-1]==1){
-            printf("Pemain 1 terkena ranjau !");
+            printf("Pemain 1 terkena ranjau !\n");
             poinP2++;
         }
         else{
-            printf("Pemain 1 selamat !");
+            printf("Pemain 1 selamat !\n");
             poinP1++;
         }
     }
@@ -87,6 +95,7 @@ int cekAllRanjau(int hole[]){
 
 int main(){
     while(1){
+        status =0;
         if (poinP1==10 || poinP2 == 10 || cekAllRanjau(holeP1) || cekAllRanjau(holeP2)) break;
         else{
             pthread_create (&(tid[0]), NULL, &pemain1, NULL);
