@@ -1,0 +1,50 @@
+ #include <iostream>
+#include <queue>
+#include <utility>
+#include <string>
+#include <string.h>
+#define CLR(a) memset(a,0,sizeof(a))
+using namespace std;
+string s1,s2;
+int cost[10][10];
+bool vis[10][10];
+int Dx[]={-2,-1, 1, 2, 2, 1, -1,-2};
+int Dy[]={-1,-2,-2,-1,1,2,2,1};
+void bfs(int sx,int sy,int dx,int dy){
+	int x,y,i;
+	queue<pair<int,int> > q;
+	pair<int,int>p;
+	p.first=sx;
+	p.second=sy;
+	q.push(p);
+	cost[sx][sy]=0;
+	CLR(vis);
+	vis[sx][sy]=true;
+	while(!q.empty()){
+		p=q.front();
+		q.pop();
+		if(p.first==dx && p.second==dy){
+			cout <<"To get from "<<s1<<" to "<< s2 << " takes "<< cost[p.first][p.second]<< " knight moves." <<endl;
+			return;
+		}
+		for(i=0;i<8;i++){
+			x=p.first + Dx[i];
+			y=p.second + Dy[i];
+			if(x>=1 && x<=8 && y>=1 && y<= 8 && !vis[x][y]){
+				vis[x][y]=true;
+				cost[x][y]=cost[p.first][p.second]+1;
+				q.push(make_pair(x,y));
+			}
+		}
+	}
+}
+int main(){
+	int dx,dy,sx,sy;
+	while(cin>>s1>>s2){
+		sx=s1[0]-96; // merubah huruf jadi angka	
+		sy=s1[1]-'0'; // merubah char jadi angka
+		dx=s2[0]-96;
+		dy=s2[1]-'0';
+		bfs(sx,sy,dx,dy);
+	}
+}
